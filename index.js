@@ -32,6 +32,13 @@ app.get("/api/persons/:id", (request, response) => {
   }
 });
 
+app.post("/api/persons", (request, response) => {
+  const info = request.body
+  const person = {name: info.name, number: info.number}
+  persons.concat(person)
+});
+
+
 app.delete("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
   const person = persons.find((person) => Number(person.id) === id);
