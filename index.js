@@ -32,18 +32,12 @@ app.get("/api/persons/:id", (request, response) => {
   }
 });
 
-const generateId = () => {
-  const maxId = notes.length > 0
-    ? Math.max(...notes.map(n => Number(n.id)))
-    : 0
-  return String(maxId + 1)
-}
 
 
 app.post('/api/persons', (request, response) => {
   const data = request.body
   const person ={
-    id: generateId(),
+    id: data.id,
     name: data.name,
     number: data.number
   }
