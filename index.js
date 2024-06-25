@@ -32,12 +32,16 @@ app.get("/api/persons/:id", (request, response) => {
   }
 });
 
-app.post("/api/persons", (request, response) => {
-  const info = request.body
-  const person = {name: info.name, number: info.number}
-  persons.concat(person)
-});
-
+app.post('/api/persons', (request, response) => {
+  const data = request.body
+  const person ={
+    name: data.name,
+    number: data.number
+  }
+  persons = persons.concat(person)
+  console.log(person)
+  response.json(person)
+})
 
 app.delete("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
