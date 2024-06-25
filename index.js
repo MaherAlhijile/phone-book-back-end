@@ -35,7 +35,7 @@ app.get("/api/persons/:id", (request, response) => {
 app.post('/api/persons', (request, response) => {
   const data = request.body
   const person ={
-    id: persons.id + 1,
+    id: persons.length + 1,
     name: data.name,
     number: data.number
   }
