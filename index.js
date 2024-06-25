@@ -35,8 +35,9 @@ app.get("/api/persons/:id", (request, response) => {
 app.delete("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
   const person = persons.find((person) => Number(person.id) === id);
-
+  console.log("Deletion insataitaon")
   if (person) {
+    persons = persons.filter((person) => Number(person.id) !== id);
     response.status(200).end();
   } else {
     response.status(404).end();
