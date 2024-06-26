@@ -1,33 +1,23 @@
-const { Int32 } = require("mongodb");
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
+const password = 'Mmmaahheerr24'
 
-if (process.argv.length < 3) {
-  console.log("give password as argument");
-  process.exit(1);
-}
+const url = `mongodb+srv://maher:Mmaahheerr24@cluster0.7xzauu8.mongodb.net/PersonsApp?retryWrites=true&w=majority`
+mongoose.set('strictQuery',false)
+mongoose.connect(url)
 
-const password = process.argv[2];
-
-const url = `mongodb+srv://maher:${password}@phonebook.ilvhg3u.mongodb.net/?retryWrites=true&w=majority&appName=phoneBook`;
-mongoose.set("strictQuery", false);
-mongoose.connect(url);
-
-const personsSchema = new mongoose.Schema({
-  id: Int32,
+const personSchema = new mongoose.Schema({
   name: String,
   number: String
-});
+})
 
-const Person = mongoose.model("Person", personsSchema);
+const Person = mongoose.model('Person', personSchema)
 
 const person = new Person({
-  id: 0,
-  name: "maher",
-  number: "0345"
-  
-});
+  name: "Maher",
+  number: "055"
+})
 
-person.save().then((result) => {
-  console.log("Perons saved!");
-  mongoose.connection.close();
-});
+person.save().then(result => {
+  console.log('person saved!')
+  mongoose.connection.close()
+})
