@@ -34,6 +34,8 @@ app.get("/api/persons/:id", (request, response, next) => {
     .then((person) => {
       if (person) {
         response.json(person);
+
+      
       } else {
         response.status(404).end();
       }
@@ -43,6 +45,7 @@ app.get("/api/persons/:id", (request, response, next) => {
 
 app.post("/api/persons", (request, response) => {
   const data = request.body;
+
   const person = new Person({
     name: data.name,
     number: data.number,
@@ -50,18 +53,22 @@ app.post("/api/persons", (request, response) => {
 
   person.save().then((result) => {
     console.log("person saved!");
+    Person.find({}).then((persons) => {
+      console.log(persons)
+    });
     response.json(person);
   });
 });
 
 //todo: when data is empty error 
-app.delete("/api/persons/:id", (request, response) => {
+app.delete("/api/persons/:id", (request, response, next) => {
   Person.findByIdAndDelete(request.params.id).then(result => {
     response.status(204).end()
   })
-  .catch(error => next(error))
+  .catch(error => errorHandler(error, request, response, next))
   
 });
+
 const errorHandler = (error, request, response, next) => {
   console.error(error);
 
