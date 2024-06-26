@@ -60,6 +60,10 @@ app.post("/api/persons", (request, response) => {
   });
 });
 
+12
+12
+12
+9
 //todo: when data is empty error 
 app.delete("/api/persons/:id", (request, response, next) => {
   Person.findByIdAndDelete(request.params.id).then(result => {
